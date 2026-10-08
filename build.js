@@ -1,0 +1,11 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const read = name => fs.readFileSync(path.join(__dirname, name), 'utf8');
+const crypto = read('crypto-js.js').split('}(this, function () {')[1].replace(/\}\)\);\s*$/, '');
+const jpeg = read('jpeg-encoder.js').split('\nif (typeof module')[0];
+if (!crypto || !jpeg.includes('function JPEGEncoder')) throw new Error('Bundled library format changed');
+const notices = ['LICENSE', 'hydroshift2-rs-LICENSE.txt', 'lian-li-linux-LICENSE.txt', 'TinyUZ-LICENSE.txt', 'CryptoJS-LICENSE.txt', 'jpeg-js-LICENSE.txt'];
+const banner = '/*\nHydroShift II S native SignalRGB plugin\nThird-party attribution and complete license notices follow.\nSee NOTICE.md for pinned source files and modifications.\n\n' + notices.map(name => '--- ' + name + ' ---\n' + read(name)).join('\n\n') + '\n*/\n';
+const bundle = banner + '/* CryptoJS 4.2.0, MIT license; brix/crypto-js. */\nconst CryptoJS=(function(){' + crypto + '})();\n' + jpeg + '\n' + read('h2s_native_logic.js');
+fs.writeFileSync(path.join(__dirname, 'HydroShift_II_S_Native.js'), bundle);
+console.log('Built HydroShift_II_S_Native.js');

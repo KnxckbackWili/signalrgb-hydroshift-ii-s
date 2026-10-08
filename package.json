@@ -1,0 +1,11 @@
+{
+  "name": "signalrgb-hydroshift-ii-s",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Experimental native SignalRGB plugin for Lian Li HydroShift II LCD-S (1CBE:A034)",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node test.js"
+  }
+}
